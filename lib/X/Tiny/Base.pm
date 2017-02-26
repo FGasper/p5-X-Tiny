@@ -243,7 +243,7 @@ sub __spew {
     my $spew = $self->to_string();
 
     if ( rindex($spew, $/) != (length($spew) - length($/)) ) {
-        $spew .= $/ . join( q<>, map { "\tfrom $_->[0]() ($_->[1], line $_->[2])$/" } @{ $CALL_STACK{$self->_get_strval()} } );
+        $spew .= $/ . join( q<>, map { "\tfrom $_->[0] ($_->[1], line $_->[2])$/" } @{ $CALL_STACK{$self->_get_strval()} } );
     }
 
     if ( $PROPAGATIONS{ $self->_get_strval() } ) {
