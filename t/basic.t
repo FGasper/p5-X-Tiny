@@ -1,4 +1,4 @@
-package t::X::Factory;
+package t::X;
 
 use parent qw( X::Tiny );
 
@@ -10,10 +10,44 @@ use parent qw( X::Tiny::Base );
 
 #----------------------------------------------------------------------
 
-package t::X::Tiny;
+package t::basic;
 
-sub stringification {
+sub get_spewage {
     return "" . t::X->create('Generic', 'Bad!');
 }
+
+#----------------------------------------------------------------------
+
+package t::main;
+
+use Test::More;
+plan tests => 4;
+
+like(
+    t::basic::get_spewage(),
+    qr<t::basic::get_spewage>,
+    'spew includes the function where the exception happened',
+);
+
+like(
+    t::basic::get_spewage(),
+    qr<t::X::Generic>,
+    'spew includes the full exception type',
+);
+
+like(
+    t::basic::get_spewage(),
+    qr<Bad!>,
+    'spew includes the message',
+);
+
+my $FILE = __FILE__;
+
+like(
+    t::basic::get_spewage(),
+    qr<\Q$FILE\E>,
+    'spew includes the filename',
+);
+
 
 1;

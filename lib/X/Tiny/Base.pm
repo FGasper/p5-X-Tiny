@@ -227,7 +227,7 @@ sub _get_call_stack {
     while ( my @call = (caller $level)[3, 1, 2] ) {
         my ($pkg) = ($call[0] =~ m<(.+)::>);
 
-        if (!$pkg->isa(__PACKAGE__) && !$pkg->isa('X::Tiny')) {
+        if (!$pkg || (!$pkg->isa(__PACKAGE__) && !$pkg->isa('X::Tiny'))) {
             push @stack, \@call;
         }
 
