@@ -3,6 +3,9 @@ MANIFEST
 Makefile.PL
 README.pod
 lib/X/Tiny.pm
-lib/X/Tiny/.Base.pm.swp
 lib/X/Tiny/Base.pm
 t/basic.t
+t/lib/MyDist/X.pm
+t/lib/MyDist/X/BadArg.pm
+t/lib/MyDist/X/Base.pm
+t/loader.t
