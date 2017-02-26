@@ -61,6 +61,20 @@ e.g., when an uncaught exception is printed.
 
 =back
 
+That stringification’s precise formatting is not defined; however, it
+will always include:
+
+=over
+
+=item * A stack trace
+
+=item * Propagations
+
+=back
+
+There is currently no access provided in code to these; if that’s something
+you’d like to have, let me know.
+
 =head1 SUBCLASS INTERFACE
 
 The default behaviors seem pretty usable and desirable to me, but there may
@@ -75,7 +89,7 @@ memory overhead of L<overload>, then make this return 0. It returns 1
 by default.
 
 You might also make this 0 if, for example, you want to handle the
-L<overload> behavior yourself. (But at that point, why use this framework?)
+L<overload> behavior yourself. (But at that point, why use X::Tiny??)
 
 =cut
 
@@ -238,15 +252,5 @@ sub __spew {
 
     return $spew;
 }
-
-#----------------------------------------------------------------------
-
-=head1 REPOSITORY
-
-...
-
-=head1 AUTHOR
-
-Felipe Gasper (FELIPE)
 
 1;

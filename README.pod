@@ -1,10 +1,3 @@
-package X::Tiny;
-
-use strict;
-use warnings;
-
-our $VERSION = '0.01-TRIAL';
-
 =encoding utf-8
 
 =head1 NAME
@@ -141,29 +134,6 @@ expressiveness of typed exceptions.
 Do be sure that any failure-prone work you do as part of exception
 instantiation has its own failure-checking mechanism. There really are not
 meant to be “sub-failures” here.
-
-=cut
-
-use strict;
-use warnings;
-
-use Module::Load ();
-
-sub create {
-    my ( $class, $type, @args ) = @_;
-
-    my $x_package = "${class}::$type";
-
-    if (!$x_package->can('new')) {
-        Module::Load::load($x_package);
-    }
-
-    return $x_package->new(@args);
-}
-
-1;
-
-#----------------------------------------------------------------------
 
 =head1 REPOSITORY
 

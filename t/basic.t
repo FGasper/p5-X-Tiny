@@ -1,4 +1,4 @@
-package t::X;
+package t::X::Factory;
 
 use parent qw( X::Tiny );
 
@@ -12,10 +12,8 @@ use parent qw( X::Tiny::Base );
 
 package t::X::Tiny;
 
-sub foo {
-    my $x = "" . t::X->create('Generic', 'Bad!');
-
-    print $x;
+sub stringification {
+    return "" . t::X->create('Generic', 'Bad!');
 }
 
-foo();
+1;
