@@ -227,7 +227,7 @@ sub _get_call_stack {
     while ( my @call = (caller $level)[3, 1, 2] ) {
         my ($pkg) = ($call[0] =~ m<(.+)::>);
 
-        if (!$pkg || (!$pkg->isa(__PACKAGE__) && !$pkg->isa('X::Tiny'))) {
+        if (!$pkg || !$pkg->isa(__PACKAGE__)) {
             push @stack, \@call;
         }
 
@@ -243,7 +243,7 @@ sub __spew {
     my $spew = $self->to_string();
 
     if ( rindex($spew, $/) != (length($spew) - length($/)) ) {
-        $spew .= $/ . join( q<>, map { "\tfrom $_->[0] ($_->[1], line $_->[2])$/" } @{ $CALL_STACK{$self->_get_strval()} } );
+        $spew .= $/ . join( q<>, map { "\t==> $_->[0] (called in $_->[1] at line $_->[2])$/" } @{ $CALL_STACK{$self->_get_strval()} } );
     }
 
     if ( $PROPAGATIONS{ $self->_get_strval() } ) {

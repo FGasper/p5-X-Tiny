@@ -3,7 +3,7 @@ package X::Tiny;
 use strict;
 use warnings;
 
-our $VERSION = '0.01-TRIAL';
+our $VERSION = '0.01_01';
 
 =encoding utf-8
 
@@ -172,3 +172,7 @@ https://github.com/FGasper/p5-X-Tiny
 =head1 AUTHOR
 
 Felipe Gasper (FELIPE)
+
+=head1 LICENSE
+
+This distribution is released under the license as Perl.
