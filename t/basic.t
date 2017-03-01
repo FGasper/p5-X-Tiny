@@ -25,29 +25,35 @@ plan tests => 4;
 
 like(
     t::basic::get_spewage(),
-    qr<t::basic::get_spewage>,
-    'spew includes the function where the exception happened',
-);
-
-like(
-    t::basic::get_spewage(),
     qr<t::X::Generic>,
     'spew includes the full exception type',
 );
 
-like(
-    t::basic::get_spewage(),
-    qr<Bad!>,
-    'spew includes the message',
-);
+SKIP: {
+    if ( $^V le v5.8.9 ) {
+        skip 'Perl 5.8 doesn’t like our lazy-load of overload.pm', 3;
+    }
 
-my $FILE = __FILE__;
+    like(
+        t::basic::get_spewage(),
+        qr<t::basic::get_spewage>,
+        'spew includes the function where the exception happened',
+    );
 
-like(
-    t::basic::get_spewage(),
-    qr<\Q$FILE\E>,
-    'spew includes the filename',
-);
 
+    like(
+        t::basic::get_spewage(),
+        qr<Bad!>,
+        'spew includes the message',
+    );
+
+    my $FILE = __FILE__;
+
+    like(
+        t::basic::get_spewage(),
+        qr<\Q$FILE\E>,
+        'spew includes the filename',
+    );
+}
 
 1;

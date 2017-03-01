@@ -37,28 +37,32 @@ my $err = $@;
 
 my $str = "" . $err;
 
-like(
-    $str,
-    qr<MyDist::X::BadArg>,
-    'spewage contains exception class',
-);
+SKIP: {
+    if ( $^V le v5.8.9 ) {
+        skip 'Perl 5.8 doesn’t like our lazy-load of overload.pm.', 4;
+    }
 
-like(
-    $str,
-    qr<line \Q$lines{'called'}\E>,
-    "caller line ($lines{'called'}) is in spewage",
-);
+    like(
+        $str,
+        qr<MyDist::X::BadArg>,
+        'spewage contains exception class',
+    );
 
-like(
-    $str,
-    qr<line \Q$lines{'thrown'}\E>,
-    "thrown line ($lines{'thrown'}) is in spewage",
-);
+    like(
+        $str,
+        qr<line \Q$lines{'called'}\E>,
+        "caller line ($lines{'called'}) is in spewage",
+    );
 
-like(
-    $str,
-    qr<propagated at .+ line \Q$lines{'propagate'}\E>,
-    "propagation line ($lines{'propagate'}) is in spewage",
-);
+    like(
+        $str,
+        qr<line \Q$lines{'thrown'}\E>,
+        "thrown line ($lines{'thrown'}) is in spewage",
+    );
 
-diag $str;
+    like(
+        $str,
+        qr<propagated at .+ line \Q$lines{'propagate'}\E>,
+        "propagation line ($lines{'propagate'}) is in spewage",
+    );
+}

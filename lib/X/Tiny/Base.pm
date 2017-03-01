@@ -75,6 +75,9 @@ will always include:
 There is currently no access provided in code to these; if that’s something
 you’d like to have, let me know.
 
+B<NOTE:> The overload stringification doesn’t seem to work as implemented in
+Perl 5.8 or earlier. Perl 5.8 went end-of-life on 14 December 2008. Yeah.
+
 =head1 SUBCLASS INTERFACE
 
 The default behaviors seem pretty usable and desirable to me, but there may
