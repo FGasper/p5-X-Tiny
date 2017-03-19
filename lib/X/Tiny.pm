@@ -84,7 +84,12 @@ exception objects whose type and attributes can facilitate meaningful
 error checking; for example, you may not care if a call to C<unlink()> fails
 with C<ENOENT>, so you can just ignore that failure. Or, you might care, but
 you might prefer just to C<warn()> rather than to stop what you’re doing.
-That’s where C<X::Tiny> comes in.
+
+X::Tiny is one of many CPAN modules that facilitates this pattern. What
+separates X::Tiny from other such modules is its light weight: the only
+“heavy” dependency is L<overload>, which is (in my experience) a reasonable
+trade-off for the helpfulness of having stack traces on uncaught exceptions.
+(The stack trace is custom logic, much lighter than L<Carp>.)
 
 =head1 FEATURES
 
@@ -134,13 +139,14 @@ module exposes to subclasses.
 =head1 DESIGN CONSIDERATIONS
 
 Admittedly, the lazy-loading behavior here embodies a generally-unwise
-practice of doing failure-prone work in the process of reporting a failure.
+practice of doing failure-prone work (i.e., loading a module at runtime)
+in the process of reporting a failure.
 In my own experience, though, that’s a reasonable tradeoff for the
 expressiveness of typed exceptions.
 
 Do be sure that any failure-prone work you do as part of exception
 instantiation has its own failure-checking mechanism. There really are not
-meant to be “sub-failures” here.
+meant to be “sub-failures” here!
 
 =cut
 
@@ -167,12 +173,16 @@ sub create {
 
 =head1 REPOSITORY
 
-https://github.com/FGasper/p5-X-Tiny
+L<https://github.com/FGasper/p5-X-Tiny>
 
 =head1 AUTHOR
 
 Felipe Gasper (FELIPE)
 
+=head1 COPYRIGHT
+
+Copyright 2017 by L<Gasper Software Consulting, LLC|http://gaspersoftware.com>
+
 =head1 LICENSE
 
-This distribution is released under the license as Perl.
+This distribution is released under the same license as Perl.
