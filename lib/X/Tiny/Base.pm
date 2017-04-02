@@ -25,12 +25,17 @@ X::Tiny::Base - super-light exception base class
         ...
     }
 
+    #Optionally, redefine this:
     sub get {
         my ($self, $attr_name) = @_;
 
         ...
     }
 
+    #Optionally, redefine this:
+    sub get_message { ... }
+
+    #Optionally, redefine this:
     sub to_string { ... }
 
     #If you override this, be sure also to call the base method.
@@ -45,12 +50,11 @@ X::Tiny::Base - super-light exception base class
 
 =head1 DESCRIPTION
 
-This base class is meant for you to subclass into your distribution’s own
-exception base class (e.g., C<My::Module::X::Base>); you should then
-subclass that base class for your distribution’s specific exception classes
-(e.g., C<My::Module::X::BadInput>).
+This base class can be subclassed into your distribution’s own
+exception base class (e.g., C<My::Module::X::Base>), or you can treat it
+as that base class itself (i.e., forgo C<My::Module::X::Base>).
 
-C<X::Tiny::Base>, then, serves two functions:
+C<X::Tiny::Base> serves two functions:
 
 =over
 
@@ -62,7 +66,7 @@ e.g., when an uncaught exception is printed.
 =back
 
 That stringification’s precise formatting is not defined; however, it
-will always include:
+will always include, in addition to the exception’s main message:
 
 =over
 
@@ -116,6 +120,18 @@ sub _new {
     my ( $class, $string, %attrs ) = @_;
 
     return bless [ $string, \%attrs ], $class;
+}
+
+=head2 I<OBJ>->get_messaage()
+
+Return the exception’s main MESSAGE.
+This is useful for contexts where you want to encapsulate the error
+internals from how you’re reporting them, e.g., for protocols.
+
+=cut
+
+sub get_message {
+    return $_[0][0];
 }
 
 =head2 I<OBJ>->get( ATTRIBUTE_NAME )

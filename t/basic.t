@@ -21,12 +21,18 @@ sub get_spewage {
 package t::main;
 
 use Test::More;
-plan tests => 4;
+plan tests => 5;
 
 like(
     t::basic::get_spewage(),
     qr<t::X::Generic>,
     'spew includes the full exception type',
+);
+
+is(
+    t::X->create('Generic', 'Bad!')->get_message(),
+    'Bad!',
+    'get_message()',
 );
 
 SKIP: {

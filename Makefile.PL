@@ -9,6 +9,9 @@ WriteMakefile(
     AUTHOR       => 'Felipe Gasper',
     ABSTRACT     => 'Super-lightweight exception framework',
     LICENSE      => 'perl',
+
+    MIN_PERL_VERSION => 5.010000,
+
     PREREQ_PM    => {
         'autodie'                  => 0,
         'parent'                   => 0,
