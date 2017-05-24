@@ -70,7 +70,7 @@ will always include, in addition to the exception’s main message:
 
 =over
 
-=item * A stack trace
+=item * A stack trace (including function arguments)
 
 =item * Propagations
 
@@ -243,10 +243,14 @@ sub _get_call_stack {
 
     my @stack;
 
+    package DB;
+    local @DB::args;
+
     while ( my @call = (caller $level)[3, 1, 2] ) {
         my ($pkg) = ($call[0] =~ m<(.+)::>);
 
         if (!$pkg || !$pkg->isa(__PACKAGE__)) {
+            push @call, \@DB::args;
             push @stack, \@call;
         }
 
@@ -262,7 +266,11 @@ sub __spew {
     my $spew = $self->to_string();
 
     if ( rindex($spew, $/) != (length($spew) - length($/)) ) {
-        $spew .= $/ . join( q<>, map { "\t==> $_->[0] (called in $_->[1] at line $_->[2])$/" } @{ $CALL_STACK{$self->_get_strval()} } );
+        my $args;
+        $spew .= $/ . join( q<>, map {
+            $args = join(', ', @{ $_->[3] } );
+            "\t==> $_->[0]($args) (called in $_->[1] at line $_->[2])$/"
+        } @{ $CALL_STACK{$self->_get_strval()} } );
     }
 
     if ( $PROPAGATIONS{ $self->_get_strval() } ) {
