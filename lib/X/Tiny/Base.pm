@@ -72,6 +72,9 @@ will always include, in addition to the exception’s main message:
 
 =item * A stack trace (including function arguments)
 
+B<IMPORTANT:> For security purposes, take care not to expose any function
+arguments that might contain sensitive information (e.g., passwords).
+
 =item * Propagations
 
 =back
