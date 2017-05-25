@@ -247,7 +247,9 @@ sub _get_call_stack {
     my @stack;
 
     package DB;
-    local @DB::args;
+
+    #This local() causes pre-5.16 Perl to segfault.
+    local @DB::args if $^V ge v5.16.0;
 
     while ( my @call = (caller $level)[3, 1, 2] ) {
         my ($pkg) = ($call[0] =~ m<(.+)::>);
