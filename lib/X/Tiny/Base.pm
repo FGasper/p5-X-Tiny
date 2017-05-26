@@ -75,6 +75,10 @@ will always include, in addition to the exception’s main message:
 B<IMPORTANT:> For security purposes, take care not to expose any function
 arguments that might contain sensitive information (e.g., passwords).
 
+Note that, in pre-5.16 Perls, this writes to the C<@DB::args> global.
+(That shouldn’t affect you, but it’s interaction with the environment, so
+better documented than not.)
+
 =item * Propagations
 
 =back
