@@ -10,3 +10,6 @@ Revision history for Perl module X::Tiny
 0.1
 - Add stack trace to stringified output. This doesn’t appear to present
 any memory or performance liabilities, at least in modern Perl versions.
+
+0.11 Tue Aug 15 2017
+- Fix stack trace logic to preserve arguments.

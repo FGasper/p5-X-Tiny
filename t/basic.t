@@ -40,7 +40,9 @@ SKIP: {
         skip 'Perl 5.8 doesn’t like our lazy-load of overload.pm', 3;
     }
 
-    my $spewage = t::basic::get_spewage('arg1', 424, [], {});
+    my $spewage = sub {
+        t::basic::get_spewage('arg1', 424, [], {});
+    }->();
 
     like(
         $spewage,

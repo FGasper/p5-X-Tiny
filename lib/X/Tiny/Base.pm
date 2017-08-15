@@ -259,7 +259,7 @@ sub _get_call_stack {
         my ($pkg) = ($call[0] =~ m<(.+)::>);
 
         if (!$pkg || !$pkg->isa(__PACKAGE__)) {
-            push @call, \@DB::args;
+            push @call, [ @DB::args ];  #need to copy the array
             push @stack, \@call;
         }
 
