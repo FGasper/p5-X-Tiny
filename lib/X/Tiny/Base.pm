@@ -281,7 +281,7 @@ sub __spew {
             #Oof. In order to avoid warn()ing on undefined values
             #(and to distinguish '' from undef) we now quote scalars.
             @printable = map {
-                ref ? $_ : !defined ? 'undef' : do {
+                ref() ? $_ : !defined() ? 'undef' : do {
                     s<'><\\'>g;
                     "'$_'"
                 }
