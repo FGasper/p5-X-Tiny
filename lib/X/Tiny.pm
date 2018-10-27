@@ -135,7 +135,7 @@ with the arguments C<foo> and C<bar>.
 
 =head1 EXCEPTION OBJECTS
 
-See L<X::Tiny::Base> for more information about the features that that
+See L<X::Tiny::Base> for more information about the features that
 module exposes to subclasses.
 
 =head1 DESIGN CONSIDERATIONS
