@@ -9,8 +9,12 @@ use lib "$FindBin::Bin/lib";
 
 use MyDist::X ();
 
+my $ran = `$^X -I$FindBin::Bin/lib -MMyDist::X -e'print overload->can('StrVal')'`;
+
+die if $?;
+
 ok(
-    !overload->can('StrVal'),
+    !$ran,
     'overload.pm is not loaded by default',
 );
 
