@@ -12,3 +12,4 @@ t/lib/MyDist/X.pm
 t/lib/MyDist/X/BadArg.pm
 t/lib/MyDist/X/Base.pm
 t/loader.t
+t/no_overload.t

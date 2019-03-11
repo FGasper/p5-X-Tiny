@@ -3,7 +3,7 @@ package X::Tiny;
 use strict;
 use warnings;
 
-our $VERSION = '0.17-TRIAL1';
+our $VERSION = '0.17-TRIAL2';
 
 =encoding utf-8
 
