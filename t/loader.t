@@ -9,7 +9,7 @@ use lib "$FindBin::Bin/lib";
 
 use MyDist::X ();
 
-my $ran = `$^X -I$FindBin::Bin/lib -MMyDist::X -e'print overload->can('StrVal')'`;
+my $ran = `$^X -Mstrict -Mwarnings -I$FindBin::Bin/lib -MMyDist::X -e'print overload->can(q<StrVal>)'`;
 
 die if $?;
 
