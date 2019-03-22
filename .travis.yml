@@ -30,7 +30,7 @@ jobs:
       stage: Strawberry
       os: windows
       language: shell
-      env: PERL_VERSION=5.28
+      env: PERL_VERSION=5.28.1.1
       before_install:
         - cinst -y strawberryperl --version $PERL_VERSION
         - export "PATH=/c/Strawberry/perl/site/bin:/c/Strawberry/perl/bin:/c/Strawberry/c/bin:$PATH"
@@ -43,7 +43,22 @@ jobs:
 
     # Subsequent instances use the alias to test different versions.
     - <<: *strawberry
-      env: PERL_VERSION=5.26
+      env: PERL_VERSION=5.26.3.1
     - <<: *strawberry
-      env: PERL_VERSION=5.24
+      env: PERL_VERSION=5.24.4.1
     - <<: *strawberry
+      env: PERL_VERSION=5.22.3.1
+    - <<: *strawberry
+      env: PERL_VERSION=5.20.3.3
+    - <<: *strawberry
+      env: PERL_VERSION=5.18.4.1
+    - <<: *strawberry
+      env: PERL_VERSION=5.16.3.3
+    - <<: *strawberry
+      env: PERL_VERSION=5.14.4.1
+    - <<: *strawberry
+      env: PERL_VERSION=5.12.3.1
+    - <<: *strawberry
+      env: PERL_VERSION=5.10.1.5
+    - <<: *strawberry
+      env: PERL_VERSION=5.8.9.5
