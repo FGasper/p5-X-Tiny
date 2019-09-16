@@ -8,8 +8,6 @@ use Test::FailWarnings;
 
 use X::Tiny::Base;
 
-my $array_obj = bless [], 'Thing';
-
 sub put_error_in_array {
     my ($array_ar) = @_;
 
@@ -17,6 +15,10 @@ sub put_error_in_array {
 
     push @$array_ar, $err;
 }
+
+my $array_obj = bless [], 'Thing';
+
+put_error_in_array($array_obj);
 
 my $array_obj_str = "$array_obj";
 
