@@ -1,5 +1,8 @@
 Revision history for Perl module X::Tiny
 
+0.22
+- Guard against stack-not-refcounted bugs.
+
 0.21 Tue Dec 3 2019
 - Optimize boolean evaluations of overloaded instances.
 
